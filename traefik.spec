@@ -1,8 +1,8 @@
-%define debug_package %{nil}
+%define _rpmfilename %%{ARCH}/%%{NAME}-%%{VERSION}_%%{ARCH}.rpm
 
 Name:           traefik
-Version:        1.2.3
-Release:        2%{?dist}
+Version:        1.4.1
+Release:        1%{dist}
 Summary:        Træfɪk, a modern reverse proxy
 ExclusiveArch:  x86_64
 
@@ -65,3 +65,5 @@ rm -rf %{buildroot}
 %changelog
 * Mon May 15 2017 AZME Mickael  > 1.0.0
 - Intial version: v1.0.0
+- Change traefik version and rename rpm filename
+- Add dependency with local filesystem
