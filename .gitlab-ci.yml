@@ -4,6 +4,7 @@ build_package:
     - rpmbuild
   script:
     - ls -ltrR
+    - spectool -g -R SPECS/*.spec
     - rpmbuild -ba --clean --define "_topdir `pwd`" --define "buildroot `pwd`/BUILDROOT" --define "_source_filedigest_algorithm md5" --define "_binary_filedigest_algorithm md5" --define "_source_payload nil" --define "_binary_payload nil" SPECS/*.spec
     - mkdir build
     - mv RPMS/noarch/*.rpm build/
