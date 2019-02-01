@@ -1,0 +1,10 @@
+image: djerfy/gitlab-ci-rpmbuild:latest
+build_package:
+  tags:
+    - rpmbuild
+  script:
+    - ls -ltrR
+    - rpmbuild -ba --clean --define "_topdir `pwd`" --define "buildroot `pwd`/BUILDROOT" --define "_source_filedigest_algorithm md5" --define "_binary_filedigest_algorithm md5" --define "_source_payload nil" --define "_binary_payload nil" SPECS/*.spec
+    - mkdir build
+    - mv RPMS/noarch/*.rpm build/
+    - ls -lrht build/*.rpm

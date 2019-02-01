@@ -1,7 +1,7 @@
 %define _rpmfilename %%{ARCH}/%%{NAME}-%%{VERSION}_%%{ARCH}.rpm
 
 Name:           traefik
-Version:        1.4.1
+Version:        1.7.1
 Release:        1%{dist}
 Summary:        Træfɪk, a modern reverse proxy
 ExclusiveArch:  x86_64
