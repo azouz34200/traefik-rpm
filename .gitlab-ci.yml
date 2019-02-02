@@ -1,11 +1,23 @@
-image: djerfy/gitlab-ci-rpmbuild:latest
-build_package:
-  tags:
-    - rpmbuild
+stages: # Ici on déclare toutes nos étapes
+  - build
+  - deploy
+
+image: centos:7
+
+build_rpm:
+  stage: build
   script:
-    - ls -ltrR
-    - spectool -g -R SPECS/*.spec
+    - yum install -y rpm-build redhat-rpm-config rpmdevtools
+    - spectool -g -R SPECS/*.spec -C SOURCES
     - rpmbuild -ba --clean --define "_topdir `pwd`" --define "buildroot `pwd`/BUILDROOT" --define "_source_filedigest_algorithm md5" --define "_binary_filedigest_algorithm md5" --define "_source_payload nil" --define "_binary_payload nil" SPECS/*.spec
-    - mkdir build
-    - mv RPMS/noarch/*.rpm build/
-    - ls -lrht build/*.rpm
+deploy_in_nexus:
+   stage: deploy
+   only:
+    - master
+   script:
+    - ls RPMS/x86_64/
+    - curl
+   #artifacts:
+    #paths:
+     # - 
+   when: on_success 
